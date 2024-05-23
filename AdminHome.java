@@ -86,11 +86,16 @@ class TopPanel extends JPanel {
 }
 
 class SidePanel extends JPanel implements ActionListener {
+    // buttons
     HomeButton b1 = new HomeButton();
     ManageBooksButton b2 = new ManageBooksButton();
     ManageMembersButton b3 = new ManageMembersButton();
     IssueBooksButton b4 = new IssueBooksButton();
     LogoutButton b5 = new LogoutButton();
+
+    // panels
+    // HomePanel p1 = new HomePanel();
+    // ManageBooksPanel p2 = new ManageBooksPanel();
 
     SidePanel() {
         this.add(b1);
@@ -114,11 +119,15 @@ class SidePanel extends JPanel implements ActionListener {
             b2.setBackground(new Color(0x1d1d1f));
             b3.setBackground(new Color(0x1d1d1f));
             b4.setBackground(new Color(0x1d1d1f));
+            MyFrame.homePanel.setVisible(true);
+            MyFrame.manageBooksPanel.setVisible(false);
         } else if (e.getSource() == b2) {
             b2.setBackground(new Color(0x37383b));
             b1.setBackground(new Color(0x1d1d1f));
             b3.setBackground(new Color(0x1d1d1f));
             b4.setBackground(new Color(0x1d1d1f));
+            MyFrame.homePanel.setVisible(false);
+            MyFrame.manageBooksPanel.setVisible(true);
         } else if (e.getSource() == b3) {
             b3.setBackground(new Color(0x37383b));
             b1.setBackground(new Color(0x1d1d1f));
@@ -136,7 +145,8 @@ class SidePanel extends JPanel implements ActionListener {
 class MyFrame extends JFrame {
     SidePanel sidePanel = new SidePanel();
     TopPanel topPanel = new TopPanel();
-    HomePanel homePanel = new HomePanel();
+    static HomePanel homePanel = new HomePanel();
+    static ManageBooksPanel manageBooksPanel = new ManageBooksPanel();
 
     MyFrame() {
         ImageIcon icon = new ImageIcon("logo.png");
@@ -152,6 +162,7 @@ class MyFrame extends JFrame {
         this.add(sidePanel);
         this.add(topPanel);
         this.add(homePanel);
+        this.add(manageBooksPanel);
     }
 }
 
