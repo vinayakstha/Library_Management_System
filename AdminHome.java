@@ -78,7 +78,12 @@ class TopPanel extends JPanel {
         ImageIcon logoImage = new ImageIcon("logo2.png");
         JLabel label = new JLabel(logoImage);
         label.setBounds(1, 3, 50, 50);
+        JLabel title = new JLabel("Nanathari Library");
+        title.setBounds(60, 15, 200, 30);
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setForeground(Color.BLACK);
         this.add(label);
+        this.add(title);
         this.setLayout(null);
         this.setBounds(0, 0, 1150, 55);
         this.setBackground(new Color(0x42a5f5));// 0x03a3a6
