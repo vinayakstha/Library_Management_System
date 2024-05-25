@@ -9,67 +9,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class Button extends JButton {
-    Button() {
+class SidePanelButton extends JButton {
+    SidePanelButton(String image, String text, int x, int y, int width, int height) {
         this.setBackground(new Color(0x1d1d1f));
         this.setForeground(new Color(255, 255, 255));
         this.setFocusable(false);
         this.setFont(new Font("Arial", Font.PLAIN, 12));
         this.setBorderPainted(false);
-    }
-}
-
-class HomeButton extends Button {
-    ImageIcon homeIcon = new ImageIcon("homeIcon.png");
-
-    HomeButton() {
-        this.setBounds(15, 20, 170, 40);
-        this.setBackground(new Color(0x37383b));
-        this.setText("Home");
-        this.setLayout(null);
-        this.setIconTextGap(-2);
-        this.setIcon(homeIcon);
-    }
-}
-
-class ManageBooksButton extends Button {
-    ImageIcon manageBookIcon = new ImageIcon("ManageBooksIcon.png");
-
-    ManageBooksButton() {
-        this.setBounds(15, 70, 170, 40);
-        this.setText("Manage Books");
-        this.setIcon(manageBookIcon);
-    }
-}
-
-class ManageMembersButton extends Button {
-    ImageIcon manangeMembersIcon = new ImageIcon("manageMembersIcon.png");
-
-    ManageMembersButton() {
-        this.setBounds(15, 120, 170, 40);
-        this.setText("Manage Members");
-        this.setIcon(manangeMembersIcon);
-    }
-}
-
-class IssueBooksButton extends Button {
-    ImageIcon issueBooksIcon = new ImageIcon("issueBooksIcon.png");
-
-    IssueBooksButton() {
-        this.setBounds(15, 170, 170, 40);
-        this.setText("Issue Books");
-        this.setIcon(issueBooksIcon);
-    }
-}
-
-class LogoutButton extends Button {
-    ImageIcon logoutIcon = new ImageIcon("logoutIcon.png");
-
-    LogoutButton() {
-        this.setBounds(15, 520, 170, 40);
-        this.setBackground(new Color(0x42a5f5));
-        this.setText("Logout");
-        this.setIcon(logoutIcon);
+        ImageIcon icon = new ImageIcon(image);
+        this.setIcon(icon);
+        this.setText(text);
+        this.setBounds(x, y, width, height);
     }
 }
 
@@ -79,7 +29,7 @@ class TopPanel extends JPanel {
         JLabel label = new JLabel(logoImage);
         label.setBounds(1, 3, 50, 50);
         JLabel title = new JLabel("Nanathari Library");
-        title.setBounds(60, 15, 200, 30);
+        title.setBounds(60, 14, 200, 30);
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setForeground(Color.BLACK);
         this.add(label);
@@ -92,17 +42,20 @@ class TopPanel extends JPanel {
 
 class SidePanel extends JPanel implements ActionListener {
     // buttons
-    HomeButton b1 = new HomeButton();
-    ManageBooksButton b2 = new ManageBooksButton();
-    ManageMembersButton b3 = new ManageMembersButton();
-    IssueBooksButton b4 = new IssueBooksButton();
-    LogoutButton b5 = new LogoutButton();
+    SidePanelButton b1 = new SidePanelButton("homeIcon.png", "home", 15, 20, 170, 40);
+    SidePanelButton b2 = new SidePanelButton("manageBooksIcon.png", "Manage Books", 15, 70, 170, 40);
+    SidePanelButton b3 = new SidePanelButton("manageMembersIcon.png", "Manage Members", 15, 120, 170, 40);
+    SidePanelButton b4 = new SidePanelButton("issueBooksIcon.png", "Issue Books", 15, 170, 170, 40);
+    SidePanelButton b5 = new SidePanelButton("logoutIcon.png", "Logout", 15, 520, 170, 40);
 
     // panels
     // HomePanel p1 = new HomePanel();
     // ManageBooksPanel p2 = new ManageBooksPanel();
 
     SidePanel() {
+        b1.setBackground(new Color(0x37383b));
+        b1.setIconTextGap(-2);
+        b5.setBackground(new Color(0x42a5f5));
         this.add(b1);
         this.add(b2);
         this.add(b3);
