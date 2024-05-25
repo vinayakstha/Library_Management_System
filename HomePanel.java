@@ -24,6 +24,7 @@ class TableColumnWidthSetter {
 class BookDetailsTable extends JScrollPane {
     TableColumnWidthSetter BookDetailsColumns = new TableColumnWidthSetter();// for bookdetails table
     JScrollPane scrollPane;
+    static DefaultTableModel model;
 
     BookDetailsTable() {
         Object[][] data = { { 1, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
@@ -32,7 +33,7 @@ class BookDetailsTable extends JScrollPane {
                 { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
                 { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" } };
         String[] str = { "Book-Id", "Name", "Author", "Genre" };
-        DefaultTableModel model = new DefaultTableModel(data, str) {
+        model = new DefaultTableModel(data, str) {
             @Override // to make cells non-editable
             public boolean isCellEditable(int row, int column) {
                 return false; // All cells are non-editable

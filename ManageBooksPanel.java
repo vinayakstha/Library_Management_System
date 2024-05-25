@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -60,6 +62,38 @@ public class ManageBooksPanel extends JPanel {
     BookDetailsTable bookDetailsTable = new BookDetailsTable();
 
     ManageBooksPanel() {
+        // ADD BUTTON
+        addButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int bookId = Integer.parseInt(bookIdTextField.getText().toString());
+                String bookName = bookNameTextField.getText().toString();
+                String bookAuthor = bookAuthorTextField.getText().toString();
+                String bookGenre = bookGenreTextField.getText().toString();
+
+                Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
+                BookDetailsTable.model.addRow(newRow);
+
+                bookIdTextField.setText(null);
+                bookNameTextField.setText(null);
+                bookAuthorTextField.setText(null);
+                bookGenreTextField.setText(null);
+            }
+        });
+
+        clearButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                bookIdTextField.setText(null);
+                bookNameTextField.setText(null);
+                bookAuthorTextField.setText(null);
+                bookGenreTextField.setText(null);
+            }
+
+        });
 
         bookDetailsTable.setBounds(50, 350, 830, 200);
         updateButton.setBackground(new Color(0x155387));
