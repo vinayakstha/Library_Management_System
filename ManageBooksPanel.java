@@ -57,7 +57,11 @@ public class ManageBooksPanel extends JPanel {
     ManageBooksPanelButton deleteButton = new ManageBooksPanelButton("delete.png", "Delete", 468, 250, 170, 40);
     ManageBooksPanelButton clearButton = new ManageBooksPanelButton("clear.png", "Clear", 678, 250, 170, 40);
 
+    BookDetailsTable bookDetailsTable = new BookDetailsTable();
+
     ManageBooksPanel() {
+
+        bookDetailsTable.setBounds(50, 350, 830, 200);
         updateButton.setBackground(new Color(0x155387));
         deleteButton.setBackground(new Color(0x942e2e));
         this.setBounds(200, 55, 950, 615);
@@ -66,6 +70,11 @@ public class ManageBooksPanel extends JPanel {
         img.setBounds(0, 0, 950, 615);
         this.setLayout(null);
         this.add(img);
+        JLabel bookDetailsLabel = new JLabel("Book Details");
+        bookDetailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        bookDetailsLabel.setForeground(Color.BLACK);
+        bookDetailsLabel.setBounds(50, 320, 200, 30);
+        img.add(bookDetailsLabel);
         img.add(bookIdLabel);
         img.add(bookIdTextField);
         img.add(bookNameTextField);
@@ -78,6 +87,7 @@ public class ManageBooksPanel extends JPanel {
         img.add(updateButton);
         img.add(deleteButton);
         img.add(clearButton);
+        img.add(bookDetailsTable);
         this.setVisible(false);
     }
 }

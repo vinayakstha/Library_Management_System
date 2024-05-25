@@ -28,11 +28,24 @@ class TopPanel extends JPanel {
         ImageIcon logoImage = new ImageIcon("logo2.png");
         JLabel label = new JLabel(logoImage);
         label.setBounds(1, 3, 50, 50);
+
+        ImageIcon accountImage = new ImageIcon("account.png");
+        JLabel label2 = new JLabel(accountImage);
+        label2.setBounds(980, 3, 50, 50);
+
         JLabel title = new JLabel("Nanathari Library");
         title.setBounds(60, 14, 200, 30);
         title.setFont(new Font("Arial", Font.BOLD, 20));
-        title.setForeground(Color.BLACK);
+        title.setForeground(Color.WHITE);
+
+        JLabel adminLabel = new JLabel("Admin");
+        adminLabel.setBounds(1025, 14, 150, 30);
+        adminLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        adminLabel.setForeground(Color.WHITE);
+
         this.add(label);
+        this.add(label2);
+        this.add(adminLabel);
         this.add(title);
         this.setLayout(null);
         this.setBounds(0, 0, 1150, 55);
