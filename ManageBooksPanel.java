@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -62,23 +63,32 @@ public class ManageBooksPanel extends JPanel {
     BookDetailsTable bookDetailsTable = new BookDetailsTable();
 
     ManageBooksPanel() {
-        // ADD BUTTON
+        // ______________ADD BUTTON____________________
         addButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int bookId = Integer.parseInt(bookIdTextField.getText().toString());
-                String bookName = bookNameTextField.getText().toString();
-                String bookAuthor = bookAuthorTextField.getText().toString();
-                String bookGenre = bookGenreTextField.getText().toString();
+                if (bookIdTextField.getText().toString().isEmpty() || bookNameTextField.getText().toString().isEmpty()
+                        || bookAuthorTextField.getText().toString().isEmpty()
+                        || bookGenreTextField.getText().toString().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill all the text fields", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
 
-                Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
-                BookDetailsTable.model.addRow(newRow);
+                    int bookId = Integer.parseInt(bookIdTextField.getText().toString());
+                    String bookName = bookNameTextField.getText().toString();
+                    String bookAuthor = bookAuthorTextField.getText().toString();
+                    String bookGenre = bookGenreTextField.getText().toString();
 
-                bookIdTextField.setText(null);
-                bookNameTextField.setText(null);
-                bookAuthorTextField.setText(null);
-                bookGenreTextField.setText(null);
+                    Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
+                    BookDetailsTable.model.addRow(newRow);
+
+                    bookIdTextField.setText(null);
+                    bookNameTextField.setText(null);
+                    bookAuthorTextField.setText(null);
+                    bookGenreTextField.setText(null);
+                }
+
             }
         });
 

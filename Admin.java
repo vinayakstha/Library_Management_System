@@ -137,7 +137,7 @@ class MyFrame extends JFrame {
     }
 }
 
-public class AdminHome {
+public class Admin {
     public static void main(String[] args) {
         new MyFrame();
     }
