@@ -5,64 +5,36 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-class TableColumnWidthSetter {
-
-    public void setColumnWidth(TableColumnModel columnModel, int columnIndex, int width) {
-        TableColumn column = columnModel.getColumn(columnIndex);
-        column.setPreferredWidth(width);
-        column.setMinWidth(width);
-        column.setMaxWidth(width);
-    }
-}
-
-class BookDetailsTable extends JScrollPane {
-    TableColumnWidthSetter BookDetailsColumns = new TableColumnWidthSetter();// for bookdetails table
-    JScrollPane scrollPane;
-    static DefaultTableModel model;
-
-    BookDetailsTable() {
-        Object[][] data = { { 1, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
+class HomePanel extends JPanel {
+    HomePanel() {
+        Object[][] data = { { 1, "How to become a Sigma", "Vinayak Shrestha", "Guide" },
+                { 2, "I Am Gay", "Sagar Lama", "Biography" },
+                { 3, "Gwara the goat", "Ronak Prajapati", "Fantasy" }, { 2, "hello", "vinayak", "horror" },
                 { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
-                { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
-                { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
+                { 2, "hello", "vinayak", "horror" },
+                { 2, "hello", "vinayak", "horror" },
                 { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" } };
         String[] str = { "Book-Id", "Name", "Author", "Genre" };
-        model = new DefaultTableModel(data, str) {
+        DefaultTableModel model = new DefaultTableModel(data, str) {
             @Override // to make cells non-editable
             public boolean isCellEditable(int row, int column) {
                 return false; // All cells are non-editable
             }
         };
-        JTable bookDetails = new JTable(model);
-        bookDetails.getTableHeader().setReorderingAllowed(false);// disables drag and drop of the column
-        bookDetails.setColumnSelectionAllowed(false);// column selection
-        bookDetails.setRowSelectionAllowed(true);// row selection
-        bookDetails.setRowHeight(30);
-        bookDetails.setSelectionBackground(Color.GREEN);
-        bookDetails.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// only allows to select single row
-        setViewportView(bookDetails);
-        setBounds(50, 50, 830, 200);
 
-        TableColumnModel columnModel = bookDetails.getColumnModel();
-        // Set the preferred, min, and max width for columns
-        BookDetailsColumns.setColumnWidth(columnModel, 0, 55); // bookIdColumn
-        BookDetailsColumns.setColumnWidth(columnModel, 1, 395); // nameColumn
-        BookDetailsColumns.setColumnWidth(columnModel, 2, 295); // authorColumn
-        BookDetailsColumns.setColumnWidth(columnModel, 3, 85); // genreColumn
-    }
-}
+        TableClass bookDetailsTable = new TableClass(model);
+        TableColumnModel columnModel = bookDetailsTable.getColumnModel();
+        bookDetailsTable.setColumnWidth(columnModel, 0, 55); // bookIdColumn
+        bookDetailsTable.setColumnWidth(columnModel, 1, 395); // nameColumn
+        bookDetailsTable.setColumnWidth(columnModel, 2, 295); // authorColumn
+        bookDetailsTable.setColumnWidth(columnModel, 3, 85); // genreColumn
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(bookDetailsTable);
+        scrollPane.setBounds(50, 50, 830, 200);
 
-class HomePanel extends JPanel {
-    TableColumnWidthSetter memberDetailsColumns = new TableColumnWidthSetter();// for memberdetails table
-    BookDetailsTable bookDetailsTable = new BookDetailsTable();
-
-    HomePanel() {
         this.setBounds(200, 55, 950, 615);
         ImageIcon background = new ImageIcon("background.jpg");
         JLabel img = new JLabel(background);
@@ -70,7 +42,7 @@ class HomePanel extends JPanel {
         this.add(img);
         this.setLayout(null);
         this.setVisible(true);
-        img.add(bookDetailsTable);
+        img.add(scrollPane);
 
         JLabel bookDetailsLabel = new JLabel("Book Details");
         bookDetailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -98,23 +70,17 @@ class HomePanel extends JPanel {
             }
         };
 
-        JTable memberDetails = new JTable(model2);
-        memberDetails.getTableHeader().setReorderingAllowed(false);// disables drag and drop of the column
-        memberDetails.setColumnSelectionAllowed(false);// column selection
-        memberDetails.setRowSelectionAllowed(true);// row selection
-        memberDetails.setRowHeight(30);
-        memberDetails.setSelectionBackground(Color.GREEN);
-        memberDetails.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// only allows to select single row
-        JScrollPane scrollPane2 = new JScrollPane(memberDetails);
+        TableClass memberDetailsTable = new TableClass(model2);
+        JScrollPane scrollPane2 = new JScrollPane(memberDetailsTable);
         scrollPane2.setBounds(50, 310, 830, 200);
         img.add(scrollPane2);
 
-        TableColumnModel columnModel2 = memberDetails.getColumnModel();// for member details
+        TableColumnModel columnModel2 = memberDetailsTable.getColumnModel();// for member details
 
-        memberDetailsColumns.setColumnWidth(columnModel2, 0, 65); // bookIdColumn
-        memberDetailsColumns.setColumnWidth(columnModel2, 1, 220); // nameColumn
-        memberDetailsColumns.setColumnWidth(columnModel2, 2, 220); // authorColumn
-        memberDetailsColumns.setColumnWidth(columnModel2, 3, 325); // genreColumn
+        memberDetailsTable.setColumnWidth(columnModel2, 0, 65); // bookIdColumn
+        memberDetailsTable.setColumnWidth(columnModel2, 1, 220); // nameColumn
+        memberDetailsTable.setColumnWidth(columnModel2, 2, 220); // authorColumn
+        memberDetailsTable.setColumnWidth(columnModel2, 3, 325); // genreColumn
 
         // validate();
     }
