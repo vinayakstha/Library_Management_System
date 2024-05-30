@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,8 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 class TextField extends JTextField {
     TextField(int x, int y, int width, int height) {
@@ -49,21 +53,23 @@ class ManageBooksPanelButton extends JButton {
 
 public class ManageBooksPanel extends JPanel {
     // ___________________LABEL_____________________________
-    Label bookIdLabel = new Label("Book Id", 50, 40, 200, 30);
-    Label bookNameLabel = new Label("Name", 500, 40, 200, 30);
-    Label bookAuthorLabel = new Label("Author", 50, 120, 200, 30);
-    Label bookGenreLabel = new Label("Genre", 500, 120, 200, 30);
+    Label bookIdLabel = new Label("Book Id", 50, 80, 200, 30);
+    Label bookNameLabel = new Label("Name", 500, 80, 200, 30);
+    Label bookAuthorLabel = new Label("Author", 50, 160, 200, 30);
+    Label bookGenreLabel = new Label("Genre", 500, 160, 200, 30);
     // __________________TEXTFIELD___________________________
-    TextField bookIdTextField = new TextField(50, 70, 350, 30);
-    TextField bookNameTextField = new TextField(500, 70, 350, 30);
-    TextField bookAuthorTextField = new TextField(50, 150, 350, 30);
-    TextField bookGenreTextField = new TextField(500, 150, 350, 30);
+    TextField searchTextField = new TextField(50, 40, 230, 30);
+    TextField bookIdTextField = new TextField(50, 110, 350, 30);
+    TextField bookNameTextField = new TextField(500, 110, 350, 30);
+    TextField bookAuthorTextField = new TextField(50, 190, 350, 30);
+    TextField bookGenreTextField = new TextField(500, 190, 350, 30);
 
     // ____________________BUTTON_____________________________
-    ManageBooksPanelButton addButton = new ManageBooksPanelButton("add.png", "Add", 50, 250, 170, 40);
-    ManageBooksPanelButton updateButton = new ManageBooksPanelButton("update.png", "Update", 258, 250, 170, 40);
-    ManageBooksPanelButton deleteButton = new ManageBooksPanelButton("delete.png", "Delete", 468, 250, 170, 40);
-    ManageBooksPanelButton clearButton = new ManageBooksPanelButton("clear.png", "Clear", 678, 250, 170, 40);
+    ManageBooksPanelButton searchButton = new ManageBooksPanelButton("icons\\search.png", "Search", 285, 40, 115, 29);
+    ManageBooksPanelButton addButton = new ManageBooksPanelButton("icons\\add.png", "Add", 50, 260, 170, 40);
+    ManageBooksPanelButton updateButton = new ManageBooksPanelButton("icons\\update.png", "Update", 258, 260, 170, 40);
+    ManageBooksPanelButton deleteButton = new ManageBooksPanelButton("icons\\delete.png", "Delete", 468, 260, 170, 40);
+    ManageBooksPanelButton clearButton = new ManageBooksPanelButton("icons\\clear.png", "Clear", 678, 260, 170, 40);
 
     ManageBooksPanel() {
         Object[][] data = { { 1, "How to become a Sigma", "Vinayak Shrestha", "Guide" },
@@ -90,6 +96,21 @@ public class ManageBooksPanel extends JPanel {
         JScrollPane scrollPane2 = new JScrollPane();
         scrollPane2.setViewportView(bookDetailsTable2);
 
+        // _______________SEARCH TEXTFIELD_______________
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(model2);
+        bookDetailsTable2.setRowSorter(rowSorter);
+
+        searchTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String text = searchTextField.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 1));
+                }
+            }
+        });
         // ______________ADD BUTTON____________________
         addButton.addActionListener(new ActionListener() {
 
@@ -191,6 +212,7 @@ public class ManageBooksPanel extends JPanel {
         });
 
         scrollPane2.setBounds(50, 350, 830, 200);
+        searchButton.setBackground(new Color(0, 0, 0));
         updateButton.setBackground(new Color(0x155387));
         deleteButton.setBackground(new Color(0x942e2e));
         this.setBounds(200, 55, 950, 615);
@@ -205,6 +227,7 @@ public class ManageBooksPanel extends JPanel {
         bookDetailsLabel.setBounds(50, 320, 200, 30);
         img.add(bookDetailsLabel);
         img.add(bookIdLabel);
+        img.add(searchTextField);
         img.add(bookIdTextField);
         img.add(bookNameTextField);
         img.add(bookNameLabel);
@@ -212,6 +235,7 @@ public class ManageBooksPanel extends JPanel {
         img.add(bookGenreLabel);
         img.add(bookAuthorTextField);
         img.add(bookGenreTextField);
+        img.add(searchButton);
         img.add(addButton);
         img.add(updateButton);
         img.add(deleteButton);

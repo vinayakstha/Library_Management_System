@@ -29,7 +29,7 @@ class TopPanel extends JPanel {
         JLabel label = new JLabel(logoImage);
         label.setBounds(1, 3, 50, 50);
 
-        ImageIcon accountImage = new ImageIcon("account.png");
+        ImageIcon accountImage = new ImageIcon("icons\\account.png");
         JLabel label2 = new JLabel(accountImage);
         label2.setBounds(980, 3, 50, 50);
 
@@ -55,11 +55,11 @@ class TopPanel extends JPanel {
 
 class SidePanel extends JPanel implements ActionListener {
     // buttons
-    SidePanelButton b1 = new SidePanelButton("homeIcon.png", "home", 15, 20, 170, 40);
-    SidePanelButton b2 = new SidePanelButton("manageBooksIcon.png", "Manage Books", 15, 70, 170, 40);
-    SidePanelButton b3 = new SidePanelButton("manageMembersIcon.png", "Manage Members", 15, 120, 170, 40);
-    SidePanelButton b4 = new SidePanelButton("issueBooksIcon.png", "Issue Books", 15, 170, 170, 40);
-    SidePanelButton b5 = new SidePanelButton("logoutIcon.png", "Logout", 15, 520, 170, 40);
+    SidePanelButton b1 = new SidePanelButton("icons\\homeIcon.png", "home", 15, 20, 170, 40);
+    SidePanelButton b2 = new SidePanelButton("icons\\manageBooksIcon.png", "Manage Books", 15, 70, 170, 40);
+    SidePanelButton b3 = new SidePanelButton("icons\\manageMembersIcon.png", "Manage Members", 15, 120, 170, 40);
+    SidePanelButton b4 = new SidePanelButton("icons\\issueBooksIcon.png", "Issue Books", 15, 170, 170, 40);
+    SidePanelButton b5 = new SidePanelButton("icons\\logoutIcon.png", "Logout", 15, 520, 170, 40);
 
     // panels
     // HomePanel p1 = new HomePanel();
