@@ -196,18 +196,23 @@ public class ManageBooksPanel extends JPanel {
         bookDetailsTable2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // int rowIndex = bookDetailsTable2.getSelectedRow();
-                int rowIndex = bookDetailsTable2.getSelectedRow();
-                int bookId = (int) model2.getValueAt(rowIndex, 0);
-                String bookName = (String) model2.getValueAt(rowIndex, 1);
-                String bookAuthor = (String) model2.getValueAt(rowIndex, 2);
-                String bookGenre = (String) model2.getValueAt(rowIndex, 3);
+                // Get the selected row index from the view
+                int viewRowIndex = bookDetailsTable2.getSelectedRow();
 
+                // Convert the view row index to the model row index
+                int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
+
+                // Get the data from the model using the model row index
+                int bookId = (int) model2.getValueAt(modelRowIndex, 0);
+                String bookName = (String) model2.getValueAt(modelRowIndex, 1);
+                String bookAuthor = (String) model2.getValueAt(modelRowIndex, 2);
+                String bookGenre = (String) model2.getValueAt(modelRowIndex, 3);
+
+                // Set the data to the text fields
                 bookIdTextField.setText(String.valueOf(bookId));
                 bookNameTextField.setText(bookName);
                 bookAuthorTextField.setText(bookAuthor);
                 bookGenreTextField.setText(bookGenre);
-
             }
         });
 
