@@ -140,7 +140,7 @@ public class ManageBooksPanel extends JPanel {
                                 "Information",
                                 JOptionPane.INFORMATION_MESSAGE);
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Book ID must be an integer",
+                        JOptionPane.showMessageDialog(null, "Book ID must be a number",
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
@@ -165,33 +165,40 @@ public class ManageBooksPanel extends JPanel {
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     } else {
-                        int bookId = Integer.parseInt(bookIdTextField.getText().toString());
-                        String bookName = bookNameTextField.getText().toString();
-                        String bookAuthor = bookAuthorTextField.getText().toString();
-                        String bookGenre = bookGenreTextField.getText().toString();
+                        try {
+                            int bookId = Integer.parseInt(bookIdTextField.getText().toString());
+                            String bookName = bookNameTextField.getText().toString();
+                            String bookAuthor = bookAuthorTextField.getText().toString();
+                            String bookGenre = bookGenreTextField.getText().toString();
 
-                        // Get the selected row index from the view
-                        int viewRowIndex = bookDetailsTable2.getSelectedRow();
+                            // Get the selected row index from the view
+                            int viewRowIndex = bookDetailsTable2.getSelectedRow();
 
-                        // Check if a row is selected
-                        if (viewRowIndex != -1) {
-                            // Convert the view row index to the model row index
-                            int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
+                            // Check if a row is selected
+                            if (viewRowIndex != -1) {
+                                // Convert the view row index to the model row index
+                                int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
 
-                            // Update the row in the model using the model row index
-                            model2.setValueAt(bookId, modelRowIndex, 0);
-                            model2.setValueAt(bookName, modelRowIndex, 1);
-                            model2.setValueAt(bookAuthor, modelRowIndex, 2);
-                            model2.setValueAt(bookGenre, modelRowIndex, 3);
+                                // Update the row in the model using the model row index
+                                model2.setValueAt(bookId, modelRowIndex, 0);
+                                model2.setValueAt(bookName, modelRowIndex, 1);
+                                model2.setValueAt(bookAuthor, modelRowIndex, 2);
+                                model2.setValueAt(bookGenre, modelRowIndex, 3);
 
-                            bookIdTextField.setText(null);
-                            bookNameTextField.setText(null);
-                            bookAuthorTextField.setText(null);
-                            bookGenreTextField.setText(null);
-                            JOptionPane.showMessageDialog(null, "Book updated successfully",
-                                    "Information",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            bookDetailsTable2.clearSelection();
+                                bookIdTextField.setText(null);
+                                bookNameTextField.setText(null);
+                                bookAuthorTextField.setText(null);
+                                bookGenreTextField.setText(null);
+                                JOptionPane.showMessageDialog(null, "Book updated successfully",
+                                        "Information",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                                bookDetailsTable2.clearSelection();
+                            }
+
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, "Book ID must be a number",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
