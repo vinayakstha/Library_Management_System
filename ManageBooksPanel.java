@@ -163,23 +163,63 @@ public class ManageBooksPanel extends JPanel {
                     String bookAuthor = bookAuthorTextField.getText().toString();
                     String bookGenre = bookGenreTextField.getText().toString();
 
-                    int row = bookDetailsTable2.getSelectedRow();
-                    model2.setValueAt(bookId, row, 0);
-                    model2.setValueAt(bookName, row, 1);
-                    model2.setValueAt(bookAuthor, row, 2);
-                    model2.setValueAt(bookGenre, row, 3);
+                    // Get the selected row index from the view
+                    int viewRowIndex = bookDetailsTable2.getSelectedRow();
 
-                    bookIdTextField.setText(null);
-                    bookNameTextField.setText(null);
-                    bookAuthorTextField.setText(null);
-                    bookGenreTextField.setText(null);
-                    JOptionPane.showMessageDialog(null, "Book updated successfully",
-                            "Information",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    // Check if a row is selected
+                    if (viewRowIndex != -1) {
+                        // Convert the view row index to the model row index
+                        int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
+
+                        // Update the row in the model using the model row index
+                        model2.setValueAt(bookId, modelRowIndex, 0);
+                        model2.setValueAt(bookName, modelRowIndex, 1);
+                        model2.setValueAt(bookAuthor, modelRowIndex, 2);
+                        model2.setValueAt(bookGenre, modelRowIndex, 3);
+
+                        bookIdTextField.setText(null);
+                        bookNameTextField.setText(null);
+                        bookAuthorTextField.setText(null);
+                        bookGenreTextField.setText(null);
+                        JOptionPane.showMessageDialog(null, "Book updated successfully",
+                                "Information",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please select a row to update",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-
             }
         });
+
+        // _________________DELETE BUTTON_________________________
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (bookDetailsTable2.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select a book to delete", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int selection = JOptionPane.showConfirmDialog(null, "Do you want to delete this book?", "Confirm",
+                            JOptionPane.YES_NO_OPTION);
+                    if (selection == JOptionPane.YES_OPTION) {
+                        // Get the selected row index from the view
+                        int viewRowIndex = bookDetailsTable2.getSelectedRow();
+
+                        // Convert the view row index to the model row index
+                        int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
+
+                        // Delete the row in the model using the model row index
+                        model2.removeRow(modelRowIndex);
+
+                        JOptionPane.showMessageDialog(null, "Book deleted successfully!", "Message",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+        });
+
         // ________________CLEAR BUTTON________________________
         clearButton.addActionListener(new ActionListener() {
 
