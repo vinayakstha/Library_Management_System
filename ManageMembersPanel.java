@@ -1,8 +1,12 @@
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class ManageMembersPanel extends JPanel {
     // ___________________LABEL_____________________________
@@ -24,12 +28,42 @@ public class ManageMembersPanel extends JPanel {
     ManageBooksPanelButton clearButton1 = new ManageBooksPanelButton("icons\\clear.png", "Clear", 578, 260, 170, 40);
 
     ManageMembersPanel() {
+        Object[][] data2 = { { 1, "Vinayak", "Shrestha", "vinayak@gmail.com" },
+                { 2, "Sagar", "Lama", "imgay@gmail.com" },
+                { 3, "Ronak", "Prajapati", "gwara@gmail.com" }, { 2, "hello", "vinayak", "horror" },
+                { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
+                { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
+                { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" } };
+        String[] str2 = { "Member-Id", "First-Name", "Last-Name", "e-mail" };
+        DefaultTableModel model2 = new DefaultTableModel(data2, str2) {
+            @Override // to make cells non-editable
+            public boolean isCellEditable(int row, int column) {
+                return false; // All cells are non-editable
+            }
+        };
+        TableClass memberDetailsTable2 = new TableClass(model2);
+        TableColumnModel columnModel3 = memberDetailsTable2.getColumnModel();// for member details
+
+        memberDetailsTable2.setColumnWidth(columnModel3, 0, 65); // bookIdColumn
+        memberDetailsTable2.setColumnWidth(columnModel3, 1, 220); // nameColumn
+        memberDetailsTable2.setColumnWidth(columnModel3, 2, 220); // authorColumn
+        memberDetailsTable2.setColumnWidth(columnModel3, 3, 325); // genreColumn
+
+        JScrollPane scrollPane3 = new JScrollPane(memberDetailsTable2);
+        scrollPane3.setBounds(50, 350, 830, 200);
+        scrollPane3.setViewportView(memberDetailsTable2);
+
         searchButton1.setBackground(new Color(0, 0, 0));
         updateButton1.setBackground(new Color(0x155387));
         deleteButton1.setBackground(new Color(0x942e2e));
         this.setBounds(200, 55, 950, 615);
         ImageIcon background1 = new ImageIcon("background.jpg");
         JLabel img1 = new JLabel(background1);
+
+        JLabel memberDetailsLabel = new JLabel("Member Details");
+        memberDetailsLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        memberDetailsLabel.setForeground(Color.BLACK);
+        memberDetailsLabel.setBounds(50, 320, 200, 30);
         img1.setBounds(0, 0, 950, 615);
         this.setLayout(null);
         this.add(img1);
@@ -46,6 +80,8 @@ public class ManageMembersPanel extends JPanel {
         img1.add(memberEmailLabel);
         img1.add(memberFirstNameLabel);
         img1.add(memberLastNameLabel);
+        img1.add(memberDetailsLabel);
+        img1.add(scrollPane3);
 
         this.setVisible(false);
     }
