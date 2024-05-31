@@ -113,35 +113,38 @@ public class ManageBooksPanel extends JPanel {
         });
         // ______________ADD BUTTON____________________
         addButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (bookIdTextField.getText().toString().isEmpty() ||
-                        bookNameTextField.getText().toString().isEmpty()
-                        || bookAuthorTextField.getText().toString().isEmpty()
-                        || bookGenreTextField.getText().toString().isEmpty()) {
+                        bookNameTextField.getText().toString().isEmpty() ||
+                        bookAuthorTextField.getText().toString().isEmpty() ||
+                        bookGenreTextField.getText().toString().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all the text fields",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
+                    try {
+                        int bookId = Integer.parseInt(bookIdTextField.getText().toString());
+                        String bookName = bookNameTextField.getText().toString();
+                        String bookAuthor = bookAuthorTextField.getText().toString();
+                        String bookGenre = bookGenreTextField.getText().toString();
 
-                    int bookId = Integer.parseInt(bookIdTextField.getText().toString());
-                    String bookName = bookNameTextField.getText().toString();
-                    String bookAuthor = bookAuthorTextField.getText().toString();
-                    String bookGenre = bookGenreTextField.getText().toString();
+                        Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
+                        model2.addRow(newRow);
 
-                    Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
-                    model2.addRow(newRow);
-
-                    bookIdTextField.setText(null);
-                    bookNameTextField.setText(null);
-                    bookAuthorTextField.setText(null);
-                    bookGenreTextField.setText(null);
-                    JOptionPane.showMessageDialog(null, "Book added successfully",
-                            "Information",
-                            JOptionPane.INFORMATION_MESSAGE);
+                        bookIdTextField.setText(null);
+                        bookNameTextField.setText(null);
+                        bookAuthorTextField.setText(null);
+                        bookGenreTextField.setText(null);
+                        JOptionPane.showMessageDialog(null, "Book added successfully",
+                                "Information",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Book ID must be an integer",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-
             }
         });
 
