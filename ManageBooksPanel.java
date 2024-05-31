@@ -149,45 +149,47 @@ public class ManageBooksPanel extends JPanel {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (bookIdTextField.getText().toString().isEmpty() ||
-                        bookNameTextField.getText().toString().isEmpty()
-                        || bookAuthorTextField.getText().toString().isEmpty()
-                        || bookGenreTextField.getText().toString().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please fill all the text fields",
+                if (bookDetailsTable2.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select a book to update",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
-
-                    int bookId = Integer.parseInt(bookIdTextField.getText().toString());
-                    String bookName = bookNameTextField.getText().toString();
-                    String bookAuthor = bookAuthorTextField.getText().toString();
-                    String bookGenre = bookGenreTextField.getText().toString();
-
-                    // Get the selected row index from the view
-                    int viewRowIndex = bookDetailsTable2.getSelectedRow();
-
-                    // Check if a row is selected
-                    if (viewRowIndex != -1) {
-                        // Convert the view row index to the model row index
-                        int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
-
-                        // Update the row in the model using the model row index
-                        model2.setValueAt(bookId, modelRowIndex, 0);
-                        model2.setValueAt(bookName, modelRowIndex, 1);
-                        model2.setValueAt(bookAuthor, modelRowIndex, 2);
-                        model2.setValueAt(bookGenre, modelRowIndex, 3);
-
-                        bookIdTextField.setText(null);
-                        bookNameTextField.setText(null);
-                        bookAuthorTextField.setText(null);
-                        bookGenreTextField.setText(null);
-                        JOptionPane.showMessageDialog(null, "Book updated successfully",
-                                "Information",
-                                JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Please select a row to update",
+                    if (bookIdTextField.getText().toString().isEmpty() ||
+                            bookNameTextField.getText().toString().isEmpty()
+                            || bookAuthorTextField.getText().toString().isEmpty()
+                            || bookGenreTextField.getText().toString().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Please fill all the text fields",
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        int bookId = Integer.parseInt(bookIdTextField.getText().toString());
+                        String bookName = bookNameTextField.getText().toString();
+                        String bookAuthor = bookAuthorTextField.getText().toString();
+                        String bookGenre = bookGenreTextField.getText().toString();
+
+                        // Get the selected row index from the view
+                        int viewRowIndex = bookDetailsTable2.getSelectedRow();
+
+                        // Check if a row is selected
+                        if (viewRowIndex != -1) {
+                            // Convert the view row index to the model row index
+                            int modelRowIndex = bookDetailsTable2.convertRowIndexToModel(viewRowIndex);
+
+                            // Update the row in the model using the model row index
+                            model2.setValueAt(bookId, modelRowIndex, 0);
+                            model2.setValueAt(bookName, modelRowIndex, 1);
+                            model2.setValueAt(bookAuthor, modelRowIndex, 2);
+                            model2.setValueAt(bookGenre, modelRowIndex, 3);
+
+                            bookIdTextField.setText(null);
+                            bookNameTextField.setText(null);
+                            bookAuthorTextField.setText(null);
+                            bookGenreTextField.setText(null);
+                            JOptionPane.showMessageDialog(null, "Book updated successfully",
+                                    "Information",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            bookDetailsTable2.clearSelection();
+                        }
                     }
                 }
             }
@@ -229,6 +231,7 @@ public class ManageBooksPanel extends JPanel {
                 bookNameTextField.setText(null);
                 bookAuthorTextField.setText(null);
                 bookGenreTextField.setText(null);
+                bookDetailsTable2.clearSelection();
             }
 
         });

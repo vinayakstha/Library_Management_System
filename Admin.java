@@ -92,6 +92,7 @@ class SidePanel extends JPanel implements ActionListener {
             b4.setBackground(new Color(0x1d1d1f));
             MyFrame.homePanel.setVisible(true);
             MyFrame.manageBooksPanel.setVisible(false);
+            MyFrame.manageMembersPanel.setVisible(false);
         } else if (e.getSource() == b2) {
             b2.setBackground(new Color(0x37383b));
             b1.setBackground(new Color(0x1d1d1f));
@@ -99,11 +100,15 @@ class SidePanel extends JPanel implements ActionListener {
             b4.setBackground(new Color(0x1d1d1f));
             MyFrame.homePanel.setVisible(false);
             MyFrame.manageBooksPanel.setVisible(true);
+            MyFrame.manageMembersPanel.setVisible(false);
         } else if (e.getSource() == b3) {
             b3.setBackground(new Color(0x37383b));
             b1.setBackground(new Color(0x1d1d1f));
             b2.setBackground(new Color(0x1d1d1f));
             b4.setBackground(new Color(0x1d1d1f));
+            MyFrame.homePanel.setVisible(false);
+            MyFrame.manageBooksPanel.setVisible(false);
+            MyFrame.manageMembersPanel.setVisible(true);
         } else if (e.getSource() == b4) {
             b4.setBackground(new Color(0x37383b));
             b1.setBackground(new Color(0x1d1d1f));
@@ -118,6 +123,7 @@ class MyFrame extends JFrame {
     TopPanel topPanel = new TopPanel();
     static HomePanel homePanel = new HomePanel();
     static ManageBooksPanel manageBooksPanel = new ManageBooksPanel();
+    static ManageMembersPanel manageMembersPanel = new ManageMembersPanel();
 
     MyFrame() {
         ImageIcon icon = new ImageIcon("logo.png");
@@ -134,6 +140,7 @@ class MyFrame extends JFrame {
         this.add(topPanel);
         this.add(homePanel);
         this.add(manageBooksPanel);
+        this.add(manageMembersPanel);
     }
 }
 
