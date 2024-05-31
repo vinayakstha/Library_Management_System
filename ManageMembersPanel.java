@@ -1,12 +1,16 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
 
 public class ManageMembersPanel extends JPanel {
     // ___________________LABEL_____________________________
@@ -35,13 +39,13 @@ public class ManageMembersPanel extends JPanel {
                 { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" },
                 { 2, "hello", "vinayak", "horror" }, { 2, "hello", "vinayak", "horror" } };
         String[] str2 = { "Member-Id", "First-Name", "Last-Name", "e-mail" };
-        DefaultTableModel model2 = new DefaultTableModel(data2, str2) {
+        DefaultTableModel model3 = new DefaultTableModel(data2, str2) {
             @Override // to make cells non-editable
             public boolean isCellEditable(int row, int column) {
                 return false; // All cells are non-editable
             }
         };
-        TableClass memberDetailsTable2 = new TableClass(model2);
+        TableClass memberDetailsTable2 = new TableClass(model3);
         TableColumnModel columnModel3 = memberDetailsTable2.getColumnModel();// for member details
 
         memberDetailsTable2.setColumnWidth(columnModel3, 0, 65); // bookIdColumn
@@ -52,6 +56,22 @@ public class ManageMembersPanel extends JPanel {
         JScrollPane scrollPane3 = new JScrollPane(memberDetailsTable2);
         scrollPane3.setBounds(50, 350, 830, 200);
         scrollPane3.setViewportView(memberDetailsTable2);
+
+        // _______________SEARCH TEXTFIELD_______________
+        TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(model3);
+        memberDetailsTable2.setRowSorter(rowSorter);
+
+        searchTextField1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String text = searchTextField1.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 1, 2));
+                }
+            }
+        });
 
         searchButton1.setBackground(new Color(0, 0, 0));
         updateButton1.setBackground(new Color(0x155387));

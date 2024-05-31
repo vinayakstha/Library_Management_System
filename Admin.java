@@ -43,10 +43,16 @@ class TopPanel extends JPanel {
         adminLabel.setFont(new Font("Arial", Font.BOLD, 20));
         adminLabel.setForeground(Color.WHITE);
 
+        DateLabel date = new DateLabel();
+        date.setBounds(490, 14, 280, 30);
+        date.setFont(new Font("Arial", Font.BOLD, 20));
+        date.setForeground(Color.WHITE);
+
         this.add(label);
         this.add(label2);
         this.add(adminLabel);
         this.add(title);
+        this.add(date);
         this.setLayout(null);
         this.setBounds(0, 0, 1150, 55);
         this.setBackground(new Color(0x42a5f5));// 0x03a3a6
