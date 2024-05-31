@@ -55,7 +55,7 @@ class TopPanel extends JPanel {
         this.add(date);
         this.setLayout(null);
         this.setBounds(0, 0, 1150, 55);
-        this.setBackground(new Color(0x42a5f5));// 0x03a3a6
+        this.setBackground(new Color(73, 150, 252));// 0x03a3a6
     }
 }
 
@@ -74,7 +74,7 @@ class SidePanel extends JPanel implements ActionListener {
     SidePanel() {
         b1.setBackground(new Color(0x37383b));
         b1.setIconTextGap(-2);
-        b5.setBackground(new Color(0x42a5f5));
+        b5.setBackground(new Color(73, 150, 252));
         this.add(b1);
         this.add(b2);
         this.add(b3);
