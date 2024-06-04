@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -129,20 +130,50 @@ public class ManageBooksPanel extends JPanel {
                         String bookAuthor = bookAuthorTextField.getText().toString();
                         String bookGenre = bookGenreTextField.getText().toString();
 
-                        Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
-                        model2.addRow(newRow);
+                        conn conn = new conn();
+                        String insertQuery = "insert into bookTable values('" + bookId + "','" + bookName + "','"
+                                + bookAuthor
+                                + "','" + bookGenre + "')";
+                        conn.s.executeUpdate(insertQuery);
+
+                        // System.out.println("Inserted successfully");
+
+                        String selectQuery = "Select * from bookTable";
+
+                        ResultSet rs = conn.s.executeQuery(selectQuery);
+
+                        java.sql.ResultSetMetaData rsmd = rs.getMetaData();
+                        int columnCount = rsmd.getColumnCount();
+
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.print(rsmd.getColumnName(i) + "\t");
+                        }
+                        System.out.println();
+
+                        while (rs.next()) {
+                            for (int i = 1; i <= columnCount; i++) {
+                                System.out.print(rs.getString(i) + "\t");
+                            }
+                            System.out.println();
+                        }
+
+                        // Object[] newRow = { bookId, bookName, bookAuthor, bookGenre };
+                        // model2.addRow(newRow);
 
                         bookIdTextField.setText(null);
                         bookNameTextField.setText(null);
                         bookAuthorTextField.setText(null);
                         bookGenreTextField.setText(null);
-                        JOptionPane.showMessageDialog(null, "Book added successfully",
-                                "Information",
-                                JOptionPane.INFORMATION_MESSAGE);
+                        // JOptionPane.showMessageDialog(null, "Book added successfully",
+                        // "Information",
+                        // JOptionPane.INFORMATION_MESSAGE);
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Book ID must be a number",
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
+                    } catch (Exception e1) {
+                        // System.out.println(e1);
+                        JOptionPane.showMessageDialog(null, e1);
                     }
                 }
             }
