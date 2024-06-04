@@ -77,7 +77,7 @@ public class ManageMembersPanel extends JPanel {
         updateButton1.setBackground(new Color(0x155387));
         deleteButton1.setBackground(new Color(0x942e2e));
         this.setBounds(200, 55, 950, 615);
-        ImageIcon background1 = new ImageIcon("background.jpg");
+        ImageIcon background1 = new ImageIcon("images\\background.jpg");
         JLabel img1 = new JLabel(background1);
 
         JLabel memberDetailsLabel = new JLabel("Member Details");

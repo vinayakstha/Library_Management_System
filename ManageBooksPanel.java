@@ -305,7 +305,7 @@ public class ManageBooksPanel extends JPanel {
         updateButton.setBackground(new Color(0x155387));
         deleteButton.setBackground(new Color(0x942e2e));
         this.setBounds(200, 55, 950, 615);
-        ImageIcon background = new ImageIcon("background.jpg");
+        ImageIcon background = new ImageIcon("images\\background.jpg");
         JLabel img = new JLabel(background);
         img.setBounds(0, 0, 950, 615);
         this.setLayout(null);

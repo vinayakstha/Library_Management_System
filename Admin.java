@@ -25,7 +25,7 @@ class SidePanelButton extends JButton {
 
 class TopPanel extends JPanel {
     TopPanel() {
-        ImageIcon logoImage = new ImageIcon("logo2.png");
+        ImageIcon logoImage = new ImageIcon("images\\logo2.png");
         JLabel label = new JLabel(logoImage);
         label.setBounds(1, 3, 50, 50);
 
@@ -132,7 +132,7 @@ class MyFrame extends JFrame {
     static ManageMembersPanel manageMembersPanel = new ManageMembersPanel();
 
     MyFrame() {
-        ImageIcon icon = new ImageIcon("logo.png");
+        ImageIcon icon = new ImageIcon("images\\logo.png");
         // ImageIcon background = new ImageIcon("background.jpg");
         // JLabel img = new JLabel(background);
         // img.setBounds(0, 0, 950, 615);

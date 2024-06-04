@@ -36,7 +36,7 @@ class HomePanel extends JPanel {
         scrollPane.setBounds(50, 50, 830, 200);
 
         this.setBounds(200, 55, 950, 615);
-        ImageIcon background = new ImageIcon("background.jpg");
+        ImageIcon background = new ImageIcon("images\\background.jpg");
         JLabel img = new JLabel(background);
         img.setBounds(0, 0, 950, 615);
         this.add(img);
